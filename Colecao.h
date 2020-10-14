@@ -28,6 +28,6 @@ void* colBuscar(Colecao* c, void* key, int (*cmp)( void* key1, void* key2));
 //Destrói uma coleção
 //Pre-condicao: (c é um TAD Colecao criado por uma chamada a colCriar)
 //Pos-condicao: a memoria usada pelo TAD foi liberada
-void colDestruir(Colecao* c);
+int colDestruir(Colecao* c);
 
 #endif /* __COLECAO_H */

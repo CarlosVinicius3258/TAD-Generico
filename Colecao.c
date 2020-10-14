@@ -6,7 +6,7 @@
 struct _colecao_ {
     int numItens;
     int maxItens;
-    void* itens;
+    void* *itens;
 };
 
 //OPERAÇÃO: Cria Colecao
@@ -42,14 +42,14 @@ int colInserir(Colecao* c, void* item){
 }
 
 //OPERAÇÃO: Destruir coleção
-void colDestruir(Colecao* c){
+int colDestruir(Colecao* c){
 
     if (c == NULL || c->itens == NULL || c->numItens!=0){
-        return NULL;
+        return 0;
     }
     free(c->itens);
     free(c);
-    
+    return 1;
 }
 
 //OPERAÇÃO: Buscar elemento na coleção
