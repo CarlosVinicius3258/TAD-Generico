@@ -13,17 +13,17 @@ Colecao* colCriar(int maxItems);
 //Adiciona um item na coleção
 //Pre-condicao : (c é um TAD Colecao criado por uma chamada a colCriar e (o TAD Colecao nao esta cheio) e (item != NULL)
 //Pos-condicao: item foi adicionado ao TAD c
-void colInserir(Colecao* c, void* item);
+int colInserir(Colecao* c, void* item);
 
 //Retira um item da coleção
 //Pre-condicao: c é um coleção criada por uma chamada a colCriar existe pelo menos um item na colecao
 //Pos-condicao: item foi retirado da colecao
-void* colRetirar(Colecao* c, void* key, int (*cmp)(void*, void*));
+void* colRetirar(Colecao* c, void* key, int (*cmp)(const void*, const void*));
 
 //Encontra um item na coleção
 //Pre-condicao: (c é um TAD Colecao criado por uma chamada a colCriar) e (key != NULL)
 //Pos-condicao: retorna um item identificado por key se ele existir no TAD c, ou return NULL caso contrátrio
-void* colBuscar(Colecao* c, void* key, int (*cmp)(void*, void*));
+void* colBuscar(Colecao* c, void* key, int (*cmp)(const void*, const void*));
 
 //Destrói uma coleção
 //Pre-condicao: (c é um TAD Colecao criado por uma chamada a colCriar)
