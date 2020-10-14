@@ -11,10 +11,8 @@ struct _colecao_ {
 
 //OPERAÇÃO: Cria Colecao
 Colecao* colCriar(int maxItens){
-    if (maxItens <= 0){
-        return NULL;
-    }
-    Colecao* c;
+    if (maxItens > 0){
+        Colecao* c;
     c = (Colecao*) malloc (sizeof(Colecao));
     if(c != NULL){
         c->itens = (void**) malloc(sizeof(void*) * maxItens);
@@ -25,15 +23,19 @@ Colecao* colCriar(int maxItens){
         c->maxItens = maxItens;
         c->numItens = 0;
         return c;
+    }else{
+        free(c);    
     }
-    free(c);
+    
+    }
     return NULL;
+    
 } 
 
 //OPERAÇÃO: Inserir Item na coleção
-void colInserir(Colecao* c, void* item){
-    if (c == NULL || c->numItens >= c->maxItens || item==NULL){
-       return NULL;
+int colInserir(Colecao* c, void* item){
+    if (c == NULL || c->numItens < c->maxItens || item!=NULL){
+       return 0;
     }
     c->itens[c->numItens] = item;
     c->numItens++; 

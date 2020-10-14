@@ -18,12 +18,12 @@ int colInserir(Colecao* c, void* item);
 //Retira um item da coleção
 //Pre-condicao: c é um coleção criada por uma chamada a colCriar existe pelo menos um item na colecao
 //Pos-condicao: item foi retirado da colecao
-void* colRetirar(Colecao* c, void* key, int (*cmp)(const void*, const void*));
+void* colRetirar(Colecao* c, void* key, int (*cmp)( void* key1,void* key2));
 
 //Encontra um item na coleção
 //Pre-condicao: (c é um TAD Colecao criado por uma chamada a colCriar) e (key != NULL)
 //Pos-condicao: retorna um item identificado por key se ele existir no TAD c, ou return NULL caso contrátrio
-void* colBuscar(Colecao* c, void* key, int (*cmp)(const void*, const void*));
+void* colBuscar(Colecao* c, void* key, int (*cmp)( void* key1, void* key2));
 
 //Destrói uma coleção
 //Pre-condicao: (c é um TAD Colecao criado por uma chamada a colCriar)
