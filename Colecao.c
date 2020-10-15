@@ -39,6 +39,7 @@ int colInserir(Colecao* c, void* item){
     }
     c->itens[c->numItens] = item;
     c->numItens++; 
+    return 1;
 }
 
 //OPERAÇÃO: Destruir coleção
