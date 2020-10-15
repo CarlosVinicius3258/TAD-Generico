@@ -1,15 +1,15 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "Colecao.h"
+#include "colecao.h"
 
 
-struct _colecao_ {
+typedef struct _colecao_ {
     int numItens;
     int maxItens;
     void* *itens;
-};
+}Colecao;
 
-//OPERAÇÃO: Cria Colecao
+//OPERAÇÃO: Cria Colecao ok
 Colecao* colCriar(int maxItens){
     if (maxItens > 0){
         Colecao* c;
@@ -32,17 +32,25 @@ Colecao* colCriar(int maxItens){
     
 } 
 
-//OPERAÇÃO: Inserir Item na coleção
+//OPERAÇÃO: Inserir Item na coleção ok
 int colInserir(Colecao* c, void* item){
-    if (c == NULL || c->numItens < c->maxItens || item!=NULL){
-       return 0;
+    if (c != NULL){
+      if(c->numItens < c->maxItens){
+        if(item!=NULL){
+          c->itens[c->numItens] = item;
+          printf("inseriu");
+          c->numItens++;
+
+          return 0;
+        }
+        
+      }
+       
     }
-    c->itens[c->numItens] = item;
-    c->numItens++; 
     return 1;
 }
 
-//OPERAÇÃO: Destruir coleção
+//OPERAÇÃO: Destruir coleção ok
 int colDestruir(Colecao* c){
 
     if (c == NULL || c->itens == NULL || c->numItens!=0){
@@ -53,21 +61,33 @@ int colDestruir(Colecao* c){
     return 1;
 }
 
-//OPERAÇÃO: Buscar elemento na coleção
+//OPERAÇÃO: Buscar elemento na coleção off
 void* colBuscar(Colecao* c, void* key, int (*cmp)(void*, void*) ){
+    printf("entrou\n");
     int i = 0;
-    if (c !=NULL || c->itens!= NULL || c->numItens > 0 ){
-        while(cmp(c->itens[i], key) != 0){
+    if (c!=NULL){
+      printf("AAAAAAA\n");
+      if(c->itens!= NULL){
+        printf("BBBBBB\n");
+        if(c->numItens > 0 ){
+          printf("CCCCCCC\n");
+          while(cmp(c->itens[i], key) != 1){
             i++;
-        }
-        if(cmp(c->itens[i], key) == 0){
+            printf("AAAAAAA");
+          }
+          if(cmp(c->itens[i], key) == 1){
+            printf("AAAAAAA");
             return c->itens[i];
+          }
         }
+          
+      }
+        
     }
     return NULL;  
 }
 
-//OPERAÇÃO: Retirar elemento da coleção
+//OPERAÇÃO: Retirar elemento da coleção off
 
 void* colRetirar(Colecao* c, void* key, int(*cmp)(void*, void*)){
     int i = 0;

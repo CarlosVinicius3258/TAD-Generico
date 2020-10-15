@@ -1,7 +1,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include "Colecao.h"
+#include "colecao.h"
 #include <string.h>
 
 
@@ -13,32 +13,37 @@ typedef struct country{
     float averageFemaleHeight;
 }Country;
 
-int cmpCountry(void *item, void *key){
-
-    Country *pItem = (Country *)item;
-
-    char *pkey = (char *)key;
-    return strcmp(pkey, pItem->capital);
+int cmpCountry(void *key, void *item){
+    Country* newItem = (Country*) item;
+    Country* pKey = (Country*) key;
+    
+    if (pKey->capital == newItem->capital && 
+      pKey->age == newItem->age && pKey->population == newItem->population && 
+      pKey->averageMaleHeight == newItem->averageMaleHeight && pKey->averageFemaleHeight == newItem->averageFemaleHeight ){
+        return 1;
+    }else{
+        return 0;
+    }
     
 }
-
 int main(){
   
 
      Country* USA;
-     Country* Canada;
-     USA->capital = "Washington";
+     USA = (Country*) malloc(sizeof(Country));
+     if(USA!=NULL){
+       USA->capital = "Washington";
      USA->age = 244;
-     Canada->age = 25;
      USA->population = 325719178;
      USA->averageMaleHeight = 175.3;
      USA->averageFemaleHeight = 161.5;
      
      Colecao* northAmerica =  colCriar(3); 
-     colInserir(northAmerica, (void*)USA);
-     colBuscar(northAmerica, (void*) "Washington", (void*)cmpCountry);
-     int a = colDestruir(northAmerica);
-     printf("%d", a);
+     colInserir(northAmerica,USA);
+     colBuscar(northAmerica,USA,cmpCountry);
+     
+     }
+     
 
   
      
