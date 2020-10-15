@@ -1,7 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "colecao.h"
-
+#define FALSE 0
+#define TRUE 1
 
 typedef struct _colecao_ {
     int numItens;
@@ -38,7 +39,7 @@ int colInserir(Colecao* c, void* item){
       if(c->numItens < c->maxItens){
         if(item!=NULL){
           c->itens[c->numItens] = item;
-          printf("inseriu");
+          printf("inseriu\n");
           c->numItens++;
 
           return 0;
@@ -54,16 +55,16 @@ int colInserir(Colecao* c, void* item){
 int colDestruir(Colecao* c){
 
     if (c == NULL || c->itens == NULL || c->numItens!=0){
-        return 0;
+        return FALSE;
     }
     free(c->itens);
     free(c);
-    return 1;
+    return TRUE;
 }
 
 //OPERAÇÃO: Buscar elemento na coleção off
 void* colBuscar(Colecao* c, void* key, int (*cmp)(void*, void*) ){
-    printf("entrou\n");
+    printf("entrou em buscar\n");
     int i = 0;
     if (c!=NULL){
       printf("AAAAAAA\n");
@@ -71,12 +72,12 @@ void* colBuscar(Colecao* c, void* key, int (*cmp)(void*, void*) ){
         printf("BBBBBB\n");
         if(c->numItens > 0 ){
           printf("CCCCCCC\n");
-          while(cmp(c->itens[i], key) != 1){
+          while(cmp(c->itens[i], key) != TRUE){
             i++;
-            printf("AAAAAAA");
+            printf("comparou");
           }
-          if(cmp(c->itens[i], key) == 1){
-            printf("AAAAAAA");
+          if(cmp(c->itens[i], key) == TRUE){
+            printf("buscou\n");
             return c->itens[i];
           }
         }
@@ -90,22 +91,37 @@ void* colBuscar(Colecao* c, void* key, int (*cmp)(void*, void*) ){
 //OPERAÇÃO: Retirar elemento da coleção off
 
 void* colRetirar(Colecao* c, void* key, int(*cmp)(void*, void*)){
+    printf("\nEntrou em retirar");
     int i = 0;
     void* aux;
-    if(c != NULL || c->itens != NULL || c->numItens > 0){
-        while(cmp(c->itens[i], key) != 0){
-            i++;
+    if(c != NULL)
+    { 
+      printf("\nif 1\n");
+      if(c->itens != NULL)
+      {
+        printf("if 2 \n");
+        if(c->numItens > 0)
+        {
+          printf("if 3\n");
+          while(cmp(c->itens[i], key) != TRUE)
+          {
+               printf("Entrei no while\n");
+              i++;
+          }
+          if (cmp(c->itens[i], key) == TRUE)
+          {
+              aux = c->itens[i];
+              while(i < c->numItens)
+              {
+                  c->itens[i] = c->itens[i+1];
+                  i++;
+              }
+              c->numItens--;
+              printf("deu certo");
+              return aux;
+          }
         }
-        if (cmp(c->itens[i], key) == 0){
-            aux = c->itens[i];
-            while(i < c->numItens){
-                c->itens[i] = c->itens[i+1];
-                i++;
-            }
-            c->numItens--;
-            return aux;
-        }
-
+      }
     }
     return NULL;
 }

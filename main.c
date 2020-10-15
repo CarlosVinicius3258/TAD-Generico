@@ -30,19 +30,34 @@ int main(){
   
 
      Country* USA;
+     Country* a = (Country*) malloc(sizeof(Country));
      USA = (Country*) malloc(sizeof(Country));
      if(USA!=NULL){
-       USA->capital = "Washington";
-     USA->age = 244;
-     USA->population = 325719178;
-     USA->averageMaleHeight = 175.3;
-     USA->averageFemaleHeight = 161.5;
-     
-     Colecao* northAmerica =  colCriar(3); 
-     colInserir(northAmerica,USA);
-     colBuscar(northAmerica,USA,cmpCountry);
-     
-     }
+      USA->capital = "Washington";
+      USA->age = 244;
+      USA->population = 325719178;
+      USA->averageMaleHeight = 175.3;
+      USA->averageFemaleHeight = 161.5;
+
+      Colecao* northAmerica = colCriar(3);
+
+      colInserir(northAmerica,USA);
+      printf("Fui criado e inserido");
+      a = colBuscar(northAmerica,USA,cmpCountry);
+
+      printf("%d", a->age);
+    
+      colRetirar(northAmerica, USA ,cmpCountry);
+
+      if(colBuscar(northAmerica,USA,cmpCountry) == NULL){
+       printf("Tirou na main %d \n", a->age); 
+      }
+      
+     colDestruir(northAmerica);
+     free(USA);
+     free(a);
+    }
+    
      
 
   
